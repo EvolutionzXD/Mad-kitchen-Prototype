@@ -1,0 +1,16 @@
+[gd_scene load_steps=5 format=3]
+
+[ext_resource type="Script" path="res://scripts/main/Main.gd" id="1_main"]
+[ext_resource type="PackedScene" path="res://scenes/levels/Kitchen_Greybox.tscn" id="2_lvl"]
+[ext_resource type="PackedScene" path="res://scenes/player/MousePlayer.tscn" id="3_plr"]
+[ext_resource type="PackedScene" path="res://scenes/ui/PrototypeHUD.tscn" id="4_hud"]
+
+[node name="Main" type="Node3D"]
+script = ExtResource("1_main")
+
+[node name="Kitchen_Greybox" parent="." instance=ExtResource("2_lvl")]
+
+[node name="MousePlayer" parent="." instance=ExtResource("3_plr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 1.5)
+
+[node name="PrototypeHUD" parent="." instance=ExtResource("4_hud")]

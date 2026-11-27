@@ -1,0 +1,70 @@
+[gd_scene load_steps=8 format=3]
+
+[ext_resource type="Script" path="res://scripts/player/MouseController.gd" id="1_ctrl"]
+[ext_resource type="Script" path="res://scripts/player/Billboard4Dir.gd" id="2_bb"]
+[ext_resource type="Script" path="res://scripts/player/CameraRig.gd" id="3_cam"]
+[ext_resource type="Texture2D" path="res://assets/sprites/mouse_placeholder_4dir.png" id="4_tex"]
+[ext_resource type="Texture2D" path="res://assets/sprites/blob_shadow.png" id="5_shad"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_stand"]
+radius = 0.09
+height = 0.34
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_crouch"]
+radius = 0.08
+height = 0.2
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_cam"]
+radius = 0.08
+
+[node name="MousePlayer" type="CharacterBody3D"]
+collision_layer = 2
+collision_mask = 1
+script = ExtResource("1_ctrl")
+
+[node name="StandingCollision" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.17, 0)
+shape = SubResource("CapsuleShape3D_stand")
+
+[node name="CrouchingCollision" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
+shape = SubResource("CapsuleShape3D_crouch")
+disabled = true
+
+[node name="CeilingCheck" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
+target_position = Vector3(0, 0.28, 0)
+collision_mask = 1
+
+[node name="FloorShadowRay" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
+target_position = Vector3(0, -10, 0)
+collision_mask = 1
+
+[node name="BlobShadow" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.006, 0)
+pixel_size = 0.0045
+texture = ExtResource("5_shad")
+
+[node name="BillboardSprite" type="Sprite3D" parent="." node_paths=PackedStringArray("target_body")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.17, 0)
+pixel_size = 0.0055
+billboard = 2
+texture_filter = 0
+texture = ExtResource("4_tex")
+hframes = 4
+script = ExtResource("2_bb")
+target_body = NodePath("..")
+
+[node name="CameraRig" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.24, 0)
+script = ExtResource("3_cam")
+
+[node name="SpringArm3D" type="SpringArm3D" parent="CameraRig"]
+shape = SubResource("SphereShape3D_cam")
+spring_length = 1.6
+margin = 0.08
+
+[node name="Camera3D" type="Camera3D" parent="CameraRig/SpringArm3D"]
+current = true
+near = 0.05

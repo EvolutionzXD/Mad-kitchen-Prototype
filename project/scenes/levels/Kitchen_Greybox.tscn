@@ -1,0 +1,103 @@
+[gd_scene load_steps=10 format=3]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_sky"]
+sky_top_color = Color(0.35, 0.55, 0.8, 1)
+sky_horizon_color = Color(0.75, 0.8, 0.85, 1)
+
+[sub_resource type="Sky" id="Sky_1"]
+sky_material = SubResource("ProceduralSkyMaterial_sky")
+
+[sub_resource type="Environment" id="Environment_1"]
+background_mode = 2
+sky = SubResource("Sky_1")
+ambient_light_source = 3
+
+[sub_resource type="StandardMaterial3D" id="Mat_Floor"]
+albedo_color = Color(0.82, 0.78, 0.72, 1)
+
+[sub_resource type="StandardMaterial3D" id="Mat_Wall"]
+albedo_color = Color(0.68, 0.72, 0.76, 1)
+
+[sub_resource type="StandardMaterial3D" id="Mat_Counter"]
+albedo_color = Color(0.55, 0.36, 0.24, 1)
+
+[sub_resource type="StandardMaterial3D" id="Mat_Fridge"]
+albedo_color = Color(0.88, 0.91, 0.94, 1)
+
+[sub_resource type="StandardMaterial3D" id="Mat_Prop"]
+albedo_color = Color(0.85, 0.62, 0.28, 1)
+
+[node name="Kitchen_Greybox" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_1")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.866025, -0.353553, 0.353553, 0, 0.707107, 0.707107, -0.5, -0.612372, 0.612372, 0, 8, 0)
+shadow_enabled = true
+
+[node name="Floor" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, 0)
+use_collision = true
+size = Vector3(20, 0.2, 20)
+material = SubResource("Mat_Floor")
+
+[node name="WallNorth" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, -10)
+use_collision = true
+size = Vector3(20, 4, 0.4)
+material = SubResource("Mat_Wall")
+
+[node name="WallSouth" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 10)
+use_collision = true
+size = Vector3(20, 4, 0.4)
+material = SubResource("Mat_Wall")
+
+[node name="WallEast" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 2, 0)
+use_collision = true
+size = Vector3(0.4, 4, 20)
+material = SubResource("Mat_Wall")
+
+[node name="WallWest" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 2, 0)
+use_collision = true
+size = Vector3(0.4, 4, 20)
+material = SubResource("Mat_Wall")
+
+[node name="CounterTop" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.65, -2)
+use_collision = true
+size = Vector3(4.2, 0.7, 1.4)
+material = SubResource("Mat_Counter")
+
+[node name="CounterLegLeft" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.95, 0.15, -2)
+use_collision = true
+size = Vector3(0.3, 0.3, 1.4)
+material = SubResource("Mat_Counter")
+
+[node name="CounterLegRight" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.95, 0.15, -2)
+use_collision = true
+size = Vector3(0.3, 0.3, 1.4)
+material = SubResource("Mat_Counter")
+
+[node name="Fridge" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.5, 1.4, -3.5)
+use_collision = true
+size = Vector3(1.5, 2.8, 1.5)
+material = SubResource("Mat_Fridge")
+
+[node name="StepBox1" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.7, 0.175, -1.5)
+use_collision = true
+size = Vector3(0.7, 0.35, 0.7)
+material = SubResource("Mat_Prop")
+
+[node name="StepPot2" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.7, 0.325, -2.35)
+use_collision = true
+size = Vector3(0.7, 0.65, 0.7)
+material = SubResource("Mat_Prop")
