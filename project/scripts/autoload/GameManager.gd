@@ -29,6 +29,9 @@ func set_state(new_state: GameState) -> void:
 		return
 	current_state = new_state
 	get_tree().paused = (new_state == GameState.PAUSED)
+	var time_manager := get_node_or_null("/root/TimeManager")
+	if time_manager:
+		time_manager.set("is_running", new_state == GameState.PLAYING)
 	state_changed.emit(current_state)
 
 

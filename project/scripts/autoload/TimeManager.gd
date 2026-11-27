@@ -11,7 +11,7 @@ var is_running: bool = true
 
 
 func _process(delta: float) -> void:
-	if not is_running or GameManager.current_state != GameManager.GameState.PLAYING:
+	if not is_running:
 		return
 
 	elapsed_cycle_time += delta
