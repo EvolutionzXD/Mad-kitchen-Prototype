@@ -1,0 +1,73 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=5
+
+[application]
+
+config/name="Mad Kitchen"
+config/features=PackedStringArray("4.4", "Forward Plus")
+config/icon="res://icon.svg"
+
+[autoload]
+
+GameManager="*res://scripts/autoload/GameManager.gd"
+SoundEventBus="*res://scripts/autoload/SoundEventBus.gd"
+TimeManager="*res://scripts/autoload/TimeManager.gd"
+
+[input]
+
+move_forward={
+"deadzone": 0.2,
+"events": [Object(InputEventKey,"device":-1,"physical_keycode":87)]
+}
+move_back={
+"deadzone": 0.2,
+"events": [Object(InputEventKey,"device":-1,"physical_keycode":83)]
+}
+move_left={
+"deadzone": 0.2,
+"events": [Object(InputEventKey,"device":-1,"physical_keycode":65)]
+}
+move_right={
+"deadzone": 0.2,
+"events": [Object(InputEventKey,"device":-1,"physical_keycode":68)]
+}
+jump={
+"deadzone": 0.2,
+"events": [Object(InputEventKey,"device":-1,"physical_keycode":32)]
+}
+crouch={
+"deadzone": 0.2,
+"events": [Object(InputEventKey,"device":-1,"physical_keycode":67), Object(InputEventKey,"device":-1,"physical_keycode":4194326)]
+}
+sprint={
+"deadzone": 0.2,
+"events": [Object(InputEventKey,"device":-1,"physical_keycode":4194325)]
+}
+interact={
+"deadzone": 0.2,
+"events": [Object(InputEventKey,"device":-1,"physical_keycode":69)]
+}
+drag={
+"deadzone": 0.2,
+"events": [Object(InputEventKey,"device":-1,"physical_keycode":70), Object(InputEventMouseButton,"device":-1,"button_index":2)]
+}
+pause={
+"deadzone": 0.2,
+"events": [Object(InputEventKey,"device":-1,"physical_keycode":4194305)]
+}
+
+[layer_names]
+
+3d_physics/layer_1="World"
+3d_physics/layer_2="Player"
+3d_physics/layer_3="Enemy"
+3d_physics/layer_4="Interactable"
+3d_physics/layer_5="LowGap"
+3d_physics/layer_6="CameraIgnore"
